@@ -48,6 +48,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
+  google_fonts: ^3.0.1
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -66,6 +68,9 @@ flutter:
 
   assets:
     - images/logo.png
+    - images/logoIcon.png
+    - images/logoText.png
+    - images/firebaseLogo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
