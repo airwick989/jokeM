@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'intro.dart' as intro;
+import 'mycolors.dart' as mycolors;
 
-Color? primaryColor = Colors.yellow[700];
-Color secondaryColor = Colors.indigoAccent;
+Color primaryColor = mycolors.CustomColors.primaryColor;
+Color secondaryColor = mycolors.CustomColors.secondaryColor;
 
 void main() {
   runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
     title: 'Navigation Basics',
     home: MyApp(),
   ));
@@ -102,13 +104,13 @@ class MyApp extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const intro.SecondRoute()),
+                        MaterialPageRoute(builder: (context) => const intro.ScrollableIntro()),
                       );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(primaryColor),
                     ),
-                    child: const Text('Get Joking',
+                    child: const Text('Why JokeM?',
                       style: TextStyle(
                         shadows: <Shadow>[
                           Shadow(
