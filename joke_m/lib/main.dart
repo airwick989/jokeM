@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'intro.dart' as intro;
 
+Color? primaryColor = Colors.yellow[700];
 Color secondaryColor = Colors.indigoAccent;
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+    title: 'Navigation Basics',
+    home: MyApp(),
+  ));
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: secondaryColor,
-        body: ListView(
-          children: [
+        body: Column(
+          children: <Widget>[
             const SizedBox(
-              height: 100,
+              height: 50,
             ),
             Image.asset(
               'images/logo.png',
-              width: 300,
-              height: 300,
+              width: 400,
+              height: 400,
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                     textStyle: const TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 15,
                     )
                   ),
                 ),
@@ -46,7 +50,7 @@ class MyApp extends StatelessWidget {
                   width: 5,
                 ),
                 const FlutterLogo(
-                  size: 30,
+                  size: 25,
                 ),
                 const SizedBox(
                   width: 5,
@@ -56,7 +60,7 @@ class MyApp extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 15,
                       )
                   ),
                 ),
@@ -65,8 +69,8 @@ class MyApp extends StatelessWidget {
                 ),
                 Image.asset(
                   'images/firebaseLogo.png',
-                  width: 30,
-                  height: 30,
+                  width: 25,
+                  height: 25,
                 ),
               ],
             ),
@@ -82,15 +86,50 @@ class MyApp extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 15,
                       )
                   ),
                 ),
               ],
             ),
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Container(
+                  margin: const EdgeInsets.all(5),
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const intro.SecondRoute()),
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(primaryColor),
+                    ),
+                    child: const Text('Get Joking',
+                      style: TextStyle(
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 3.0,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                          Shadow(
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 8.0,
+                            color: Color.fromARGB(125, 0, 0, 255),
+                          ),
+                        ],
+                      ),
+                    )
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
