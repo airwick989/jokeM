@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'mycolors.dart' as mycolors;
 import 'package:google_fonts/google_fonts.dart';
-import 'main.dart' as main;
+import 'menu.dart' as menu;
 
 final PageController _pageViewController = PageController(initialPage: 0);
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
@@ -191,7 +191,7 @@ class _ScrollableIntroState extends State<ScrollableIntro> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const main.MyApp()),
+                            MaterialPageRoute(builder: (context) => const menu.Menu()),
                           );
                         },
                         style: ButtonStyle(

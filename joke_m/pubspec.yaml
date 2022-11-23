@@ -49,6 +49,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
   google_fonts: ^3.0.1
+  vertical_card_pager: ^1.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -75,6 +76,9 @@ flutter:
     - images/laughterImage.png
     - images/laughterImage2.png
     - images/takeoffImage.png
+    - images/findJokes.png
+    - images/savedJokes.png
+    - images/options.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
