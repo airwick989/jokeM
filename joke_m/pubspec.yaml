@@ -71,6 +71,10 @@ flutter:
     - images/logoIcon.png
     - images/logoText.png
     - images/firebaseLogo.png
+    - images/knockKnockImage.png
+    - images/laughterImage.png
+    - images/laughterImage2.png
+    - images/takeoffImage.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
