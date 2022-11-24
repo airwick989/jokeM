@@ -79,6 +79,13 @@ flutter:
     - images/findJokes.png
     - images/savedJokes.png
     - images/options.png
+    - images/programming.png
+    - images/varied.png
+    - images/dark.png
+    - images/puns.png
+    - images/spooky.png
+    - images/christmas.png
+    - images/any.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

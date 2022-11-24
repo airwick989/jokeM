@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'mycolors.dart' as mycolors;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
-import 'main.dart' as main;
+import 'categories.dart' as categories;
 
 Color primaryColor = mycolors.CustomColors.primaryColor;
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
@@ -100,7 +100,7 @@ void navigate(int index, BuildContext context){
     case 0:
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const main.MyApp()),
+        MaterialPageRoute(builder: (context) => categories.Categories()),
       );
       break;
     case 1:
