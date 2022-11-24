@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'mycolors.dart' as mycolors;
-import 'package:google_fonts/google_fonts.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 Color primaryColor = mycolors.CustomColors.primaryColor;

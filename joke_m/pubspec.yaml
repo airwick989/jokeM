@@ -50,6 +50,9 @@ dev_dependencies:
 
   google_fonts: ^3.0.1
   vertical_card_pager: ^1.4.0
+  cupertino_icons: ^1.0.5
+  flutter_launcher_icons: ^0.9.2
+  shared_preferences: ^2.0.15
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
