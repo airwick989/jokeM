@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
 import 'mycolors.dart' as mycolors;
 import 'package:google_fonts/google_fonts.dart';
+import 'shared_preferences.dart' as SharedPreferences;
 
 Color primaryColor = mycolors.CustomColors.primaryColor;
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
-
-class Settings{
-  late final String language;
-  late final Set<String> blacklist;
-  late final bool skip;
-
-  Settings({
-    required this.language, required this.blacklist, required this.skip
-  });
-}
 
 
 class Options extends StatefulWidget {
@@ -387,11 +378,12 @@ class _OptionsState extends State<Options> {
       orderedBlacklist.add("explicit");
     }
     
-    final newSettings = Settings(
+    final newPreferences = SharedPreferences.Preferences(
         language: _selectedLanguage,
         blacklist: orderedBlacklist,
         skip: _skipIntro
     );
+
 
     // print(newSettings.language);
     // print(newSettings.blacklist);
