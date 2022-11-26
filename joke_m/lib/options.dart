@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:joke_m/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 import 'mycolors.dart' as mycolors;
 import 'package:google_fonts/google_fonts.dart';
-import 'shared_preferences.dart' as SharedPreferences;
+import 'preferences_database.dart';
+import 'package:path_provider/path_provider.dart';
 
 Color primaryColor = mycolors.CustomColors.primaryColor;
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
@@ -355,8 +360,9 @@ class _OptionsState extends State<Options> {
   }
 
 
-  void _saveSettings(){
+  Future _saveSettings() async {
     var orderedBlacklist = Set<String>();
+    String strBlacklist = "";
 
     //The Joke API requires the list of blacklisted joke types in a specific order
     if(_selectedBlacklist.contains("nsfw")) {
@@ -377,17 +383,37 @@ class _OptionsState extends State<Options> {
     if(_selectedBlacklist.contains("explicit")) {
       orderedBlacklist.add("explicit");
     }
-    
-    final newPreferences = SharedPreferences.Preferences(
-        language: _selectedLanguage,
-        blacklist: orderedBlacklist,
-        skip: _skipIntro
+
+
+    if(orderedBlacklist.length == 1){
+      strBlacklist = orderedBlacklist.elementAt(0);
+    }
+    else if(orderedBlacklist.length > 1){
+      orderedBlacklist.forEach((element) {
+        if(strBlacklist == ""){
+          strBlacklist = element;
+        }
+        else{
+          strBlacklist = "$strBlacklist,$element";
+        }
+      });
+    }
+
+
+
+    final newPreferences = Preferences(
+      id: 1,
+      language: _selectedLanguage,
+      blacklist: strBlacklist,
+      skip: _skipIntro ? 1 : 0
     );
+    //await PrefsDatabase.instance.create(newPreferences);
+    await PrefsDatabase.instance.update(newPreferences);
 
 
-    // print(newSettings.language);
-    // print(newSettings.blacklist);
-    // print(newSettings.skip);
+    // print(newPreferences.language);
+    //print(newPreferences.blacklist);
+    // print(newPreferences.skip);
     // print("\n");
   }
 

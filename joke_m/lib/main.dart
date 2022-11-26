@@ -7,6 +7,7 @@ Color primaryColor = mycolors.CustomColors.primaryColor;
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Navigation Basics',
