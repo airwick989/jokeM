@@ -5,8 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 Color primaryColor = mycolors.CustomColors.primaryColor;
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
 
-enum Languages { Czech, German, English, Spanish, French, Portuguese}
-enum Blacklist { nsfw, religious, political, racist, sexist, explicit}
+class Settings{
+  late final String language;
+  late final Set<String> blacklist;
+  late final bool skip;
+
+  Settings({
+    required this.language, required this.blacklist, required this.skip
+  });
+}
+
 
 class Options extends StatefulWidget {
   const Options({super.key});
@@ -17,8 +25,8 @@ class Options extends StatefulWidget {
 
 class _OptionsState extends State<Options> {
 
-  var _selectedLanguage = Languages.English;
-  var _selectedBlacklist = Set<Blacklist>();
+  var _selectedLanguage = "en";
+  var _selectedBlacklist = Set<String>();
   var _skipIntro = false;
 
   @override
@@ -77,9 +85,12 @@ class _OptionsState extends State<Options> {
                                           fontSize: 17,
                                         ))),
                                 activeColor: primaryColor,
-                                  value: Languages.Czech,
+                                  value: "cs",
                                   groupValue: _selectedLanguage,
-                                  onChanged: (newValue) => setState(() => _selectedLanguage = newValue!),
+                                  onChanged: (newValue) => setState(() {
+                                    _selectedLanguage = newValue!;
+                                    _saveSettings();
+                                  }),
                               ),
                               RadioListTile(
                                 title: Text("German",
@@ -89,9 +100,12 @@ class _OptionsState extends State<Options> {
                                           fontSize: 17,
                                         ))),
                                 activeColor: primaryColor,
-                                value: Languages.German,
+                                value: "de",
                                 groupValue: _selectedLanguage,
-                                onChanged: (newValue) => setState(() => _selectedLanguage = newValue!),
+                                onChanged: (newValue) => setState(() {
+                                  _selectedLanguage = newValue!;
+                                  _saveSettings();
+                                }),
                               ),
                               RadioListTile(
                                 title: Text("English",
@@ -101,9 +115,12 @@ class _OptionsState extends State<Options> {
                                           fontSize: 17,
                                         ))),
                                 activeColor: primaryColor,
-                                value: Languages.English,
+                                value: "en",
                                 groupValue: _selectedLanguage,
-                                onChanged: (newValue) => setState(() => _selectedLanguage = newValue!),
+                                onChanged: (newValue) => setState(() {
+                                  _selectedLanguage = newValue!;
+                                  _saveSettings();
+                                }),
                               ),
                               RadioListTile(
                                 title: Text("Spanish",
@@ -113,9 +130,12 @@ class _OptionsState extends State<Options> {
                                           fontSize: 17,
                                         ))),
                                 activeColor: primaryColor,
-                                value: Languages.Spanish,
+                                value: "es",
                                 groupValue: _selectedLanguage,
-                                onChanged: (newValue) => setState(() => _selectedLanguage = newValue!),
+                                onChanged: (newValue) => setState(() {
+                                  _selectedLanguage = newValue!;
+                                  _saveSettings();
+                                }),
                               ),
                               RadioListTile(
                                 title: Text("French",
@@ -125,9 +145,12 @@ class _OptionsState extends State<Options> {
                                           fontSize: 17,
                                         ))),
                                 activeColor: primaryColor,
-                                value: Languages.French,
+                                value: "fr",
                                 groupValue: _selectedLanguage,
-                                onChanged: (newValue) => setState(() => _selectedLanguage = newValue!),
+                                onChanged: (newValue) => setState(() {
+                                  _selectedLanguage = newValue!;
+                                  _saveSettings();
+                                }),
                               ),
                               RadioListTile(
                                 title: Text("Portuguese",
@@ -137,9 +160,12 @@ class _OptionsState extends State<Options> {
                                           fontSize: 17,
                                         ))),
                                 activeColor: primaryColor,
-                                value: Languages.Portuguese,
+                                value: "pt",
                                 groupValue: _selectedLanguage,
-                                onChanged: (newValue) => setState(() => _selectedLanguage = newValue!),
+                                onChanged: (newValue) => setState(() {
+                                  _selectedLanguage = newValue!;
+                                  _saveSettings();
+                                }),
                               ),
                             ],
                           ),
@@ -181,12 +207,13 @@ class _OptionsState extends State<Options> {
                                               fontSize: 17,
                                             ))),
                                     activeColor: primaryColor,
-                                    value: _selectedBlacklist.contains(Blacklist.nsfw),
+                                    value: _selectedBlacklist.contains("nsfw"),
                                     onChanged: (_){
                                       setState(() {
-                                        _selectedBlacklist.contains(Blacklist.nsfw) //if
-                                            ? _selectedBlacklist.remove(Blacklist.nsfw) //do if true
-                                            : _selectedBlacklist.add(Blacklist.nsfw); //else
+                                        _selectedBlacklist.contains("nsfw") //if
+                                            ? _selectedBlacklist.remove("nsfw") //do if true
+                                            : _selectedBlacklist.add("nsfw");
+                                            _saveSettings();//else
                                       });
                                     }
                                 ),
@@ -198,12 +225,13 @@ class _OptionsState extends State<Options> {
                                               fontSize: 17,
                                             ))),
                                     activeColor: primaryColor,
-                                    value: _selectedBlacklist.contains(Blacklist.religious),
+                                    value: _selectedBlacklist.contains("religious"),
                                     onChanged: (_){
                                       setState(() {
-                                        _selectedBlacklist.contains(Blacklist.religious) //if
-                                            ? _selectedBlacklist.remove(Blacklist.religious) //do if true
-                                            : _selectedBlacklist.add(Blacklist.religious); //else
+                                        _selectedBlacklist.contains("religious") //if
+                                            ? _selectedBlacklist.remove("religious") //do if true
+                                            : _selectedBlacklist.add("religious");
+                                            _saveSettings();//else
                                       });
                                     }
                                 ),
@@ -215,12 +243,13 @@ class _OptionsState extends State<Options> {
                                               fontSize: 17,
                                             ))),
                                     activeColor: primaryColor,
-                                    value: _selectedBlacklist.contains(Blacklist.political),
+                                    value: _selectedBlacklist.contains("political"),
                                     onChanged: (_){
                                       setState(() {
-                                        _selectedBlacklist.contains(Blacklist.political) //if
-                                            ? _selectedBlacklist.remove(Blacklist.political) //do if true
-                                            : _selectedBlacklist.add(Blacklist.political); //else
+                                        _selectedBlacklist.contains("political") //if
+                                            ? _selectedBlacklist.remove("political") //do if true
+                                            : _selectedBlacklist.add("political");
+                                            _saveSettings();//else
                                       });
                                     }
                                 ),
@@ -232,12 +261,13 @@ class _OptionsState extends State<Options> {
                                               fontSize: 17,
                                             ))),
                                     activeColor: primaryColor,
-                                    value: _selectedBlacklist.contains(Blacklist.racist),
+                                    value: _selectedBlacklist.contains("racist"),
                                     onChanged: (_){
                                       setState(() {
-                                        _selectedBlacklist.contains(Blacklist.racist) //if
-                                            ? _selectedBlacklist.remove(Blacklist.racist) //do if true
-                                            : _selectedBlacklist.add(Blacklist.racist); //else
+                                        _selectedBlacklist.contains("racist") //if
+                                            ? _selectedBlacklist.remove("racist") //do if true
+                                            : _selectedBlacklist.add("racist");
+                                            _saveSettings();//else
                                       });
                                     }
                                 ),
@@ -249,12 +279,13 @@ class _OptionsState extends State<Options> {
                                               fontSize: 17,
                                             ))),
                                     activeColor: primaryColor,
-                                    value: _selectedBlacklist.contains(Blacklist.sexist),
+                                    value: _selectedBlacklist.contains("sexist"),
                                     onChanged: (_){
                                       setState(() {
-                                        _selectedBlacklist.contains(Blacklist.sexist) //if
-                                            ? _selectedBlacklist.remove(Blacklist.sexist) //do if true
-                                            : _selectedBlacklist.add(Blacklist.sexist); //else
+                                        _selectedBlacklist.contains("sexist") //if
+                                            ? _selectedBlacklist.remove("sexist") //do if true
+                                            : _selectedBlacklist.add("sexist"); //else
+                                            _saveSettings();
                                       });
                                     }
                                 ),
@@ -266,12 +297,13 @@ class _OptionsState extends State<Options> {
                                               fontSize: 17,
                                             ))),
                                     activeColor: primaryColor,
-                                    value: _selectedBlacklist.contains(Blacklist.explicit),
+                                    value: _selectedBlacklist.contains("explicit"),
                                     onChanged: (_){
                                       setState(() {
-                                        _selectedBlacklist.contains(Blacklist.explicit) //if
-                                            ? _selectedBlacklist.remove(Blacklist.explicit) //do if true
-                                            : _selectedBlacklist.add(Blacklist.explicit); //else
+                                        _selectedBlacklist.contains("explicit") //if
+                                            ? _selectedBlacklist.remove("explicit") //do if true
+                                            : _selectedBlacklist.add("explicit"); //else
+                                            _saveSettings();
                                       });
                                     }
                                 ),
@@ -315,9 +347,10 @@ class _OptionsState extends State<Options> {
                                 activeColor: primaryColor,
                                 value: _skipIntro,
                                 onChanged: (newValue) =>
-                                    setState(() =>
-                                      _skipIntro = newValue
-                                    ),
+                                    setState(() {
+                                      _skipIntro = newValue;
+                                      _saveSettings();
+                                    }),
                               )
                           ),
                         )
@@ -329,4 +362,42 @@ class _OptionsState extends State<Options> {
       )
     );
   }
+
+
+  void _saveSettings(){
+    var orderedBlacklist = Set<String>();
+
+    //The Joke API requires the list of blacklisted joke types in a specific order
+    if(_selectedBlacklist.contains("nsfw")) {
+      orderedBlacklist.add("nsfw");
+    }
+    if(_selectedBlacklist.contains("religious")) {
+      orderedBlacklist.add("religious");
+    }
+    if(_selectedBlacklist.contains("political")) {
+      orderedBlacklist.add("political");
+    }
+    if(_selectedBlacklist.contains("racist")) {
+      orderedBlacklist.add("racist");
+    }
+    if(_selectedBlacklist.contains("sexist")) {
+      orderedBlacklist.add("sexist");
+    }
+    if(_selectedBlacklist.contains("explicit")) {
+      orderedBlacklist.add("explicit");
+    }
+    
+    final newSettings = Settings(
+        language: _selectedLanguage,
+        blacklist: orderedBlacklist,
+        skip: _skipIntro
+    );
+
+    // print(newSettings.language);
+    // print(newSettings.blacklist);
+    // print(newSettings.skip);
+    // print("\n");
+  }
+
+
 }
