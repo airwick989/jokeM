@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:joke_m/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'mycolors.dart' as mycolors;
 import 'package:google_fonts/google_fonts.dart';
@@ -21,15 +22,17 @@ class Options extends StatefulWidget {
 
 class _OptionsState extends State<Options> {
 
-  var _selectedLanguage = "en";
+  var _selectedLanguage;
   var _selectedBlacklist = Set<String>();
   var _skipIntro = false;
+  var _preferences;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
+    getPreferences();
   }
 
   @override
@@ -415,6 +418,24 @@ class _OptionsState extends State<Options> {
     //print(newPreferences.blacklist);
     // print(newPreferences.skip);
     // print("\n");
+  }
+
+  Future<void> getPreferences() async {
+    final Preferences preferences = await PrefsDatabase.instance.readPreferences(1);
+
+    setState(() {
+      _preferences = preferences;
+      _selectedLanguage = _preferences.language;
+
+      if(!_preferences.blacklist.isEmpty){
+        final split = _preferences.blacklist.split(',');
+        split.forEach((element) {
+          _selectedBlacklist.add(element);
+        });
+      }
+
+      _preferences.skip == 1 ? _skipIntro = true : _skipIntro = false;
+    });
   }
 
 
