@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:joke_m/preferences_database.dart';
 import 'mycolors.dart' as mycolors;
 import 'package:google_fonts/google_fonts.dart';
 import 'menu.dart' as menu;
@@ -197,7 +198,7 @@ class _ScrollableIntroState extends State<ScrollableIntro> {
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(secondaryColor),
                         ),
-                        child: const Text('Get Started',
+                        child: const Text('Let\'s Dive In',
                           style: TextStyle(
                             shadows: <Shadow>[
                               Shadow(

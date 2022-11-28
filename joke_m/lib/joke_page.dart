@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:joke_m/mycolors.dart';
 import 'package:joke_m/preferences_database.dart';
 import 'dart:convert' as converter;
-
+import 'categories.dart' as categories;
 import 'package:joke_m/shared_preferences.dart';
 
 class JokePage extends StatefulWidget{
@@ -37,21 +38,77 @@ class _JokePageState extends State<JokePage>{
       body: Column(
         children: <Widget>[
           const SizedBox(
-            height: 100,
+            height: 200,
           ),
           Center(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Text(_jokeText,
-                style: GoogleFonts.montserrat(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                    )),
-                textAlign: TextAlign.center,
+            child: Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: Text(_jokeText,
+                  style: GoogleFonts.montserrat(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      )),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                  children: [
+                    IconButton(
+                      onPressed: (){
+
+
+                      },
+                      icon: const Icon(Icons.save_alt_rounded, size: 50),
+                      color: CustomColors.primaryColor,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text('Save',
+                      style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                          )),
+                      textAlign: TextAlign.center,
+                    ),
+                  ]
+              ),
+              const SizedBox(
+                width: 75,
+              ),
+              Column(
+                  children: [
+                    IconButton(
+                      onPressed: (){
+                        getJoke();
+                      },
+                      icon: const Icon(Icons.arrow_circle_right_rounded, size: 50),
+                      color: CustomColors.secondaryColor,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text('Get Another',
+                      style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                          )),
+                      textAlign: TextAlign.center,
+                    ),
+                  ]
+              ),
+            ],
           ),
         ],
       ),

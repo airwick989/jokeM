@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:joke_m/preferences_database.dart';
+import 'package:joke_m/shared_preferences.dart';
 import 'intro.dart' as intro;
 import 'mycolors.dart' as mycolors;
+import 'menu.dart' as menu;
 
 Color primaryColor = mycolors.CustomColors.primaryColor;
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
@@ -102,16 +105,24 @@ class MyApp extends StatelessWidget {
                   margin: const EdgeInsets.all(5),
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const intro.ScrollableIntro()),
-                      );
+                    onPressed: () async {
+                      final Preferences preferences = await PrefsDatabase.instance.readPreferences(1);
+                      if(preferences.skip == 0){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const intro.ScrollableIntro()),
+                        );
+                      } else{
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const menu.Menu()),
+                        );
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(primaryColor),
                     ),
-                    child: const Text('Why JokeM?',
+                    child: const Text('Get Started!',
                       style: TextStyle(
                         shadows: <Shadow>[
                           Shadow(
