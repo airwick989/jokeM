@@ -25,41 +25,35 @@ class JokesDatabase{
 
 
   Future _createDB(Database db, int version) async{
-    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final textType = 'TEXT NOT NULL';
-    final textTypeNullable = 'TEXT';
 
     await db.execute('''
     CREATE TABLE $tableJokes (
-      ${JokeFields.id} $idType,
-      ${JokeFields.setup} $textTypeNullable,
-      ${JokeFields.delivery} $textType
+      ${JokeFields.text} TEXT PRIMARY KEY
       )
     ''');
   }
 
 
-  Future<Joke> create(Joke joke) async{
+  create(Joke joke) async{
     final db = await instance.database;
-    final id = await db.insert(tableJokes, joke.toJson());
-    return joke.copy(id: id);
+    await db.insert(tableJokes, joke.toJson());
   }
 
 
-  Future<Joke> readJoke(int id) async {
+  Future<Joke> readJoke(String text) async {
     final db = await instance.database;
 
     final maps = await db.query(
       tableJokes,
       columns: JokeFields.values,
-      where: '${JokeFields.id} = ?',
-      whereArgs: [id],
+      where: '${JokeFields.text} = ?',
+      whereArgs: [text],
     );
 
     if(maps.isNotEmpty){
       return Joke.fromJson(maps.first);
     } else {
-      throw Exception('ID $id not found');
+      throw Exception('Joke not found');
     }
   }
 
@@ -71,13 +65,13 @@ class JokesDatabase{
   }
 
 
-  Future<int> delete(int id) async {
+  Future<int> delete(String text) async {
     final db = await instance.database;
 
     return await db.delete(
       tableJokes,
-      where: '${JokeFields.id} = ?',
-      whereArgs: [id],
+      where: '${JokeFields.text} = ?',
+      whereArgs: [text],
     );
   }
 

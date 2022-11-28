@@ -2,44 +2,30 @@ final String tableJokes = 'jokes';
 
 class JokeFields {
   static final List<String> values = [
-    id, setup, delivery
+    text
   ];
-
-  static final String id = '_id';
-  static final String setup = 'setup';
-  static final String delivery = 'delivery';
+  static final String text = 'text';
 }
 
 class Joke{
-
-  final int? id;
-  final String setup;
-  final String delivery;
+  final String text;
 
   const Joke({
-    this.id, required this.setup, required this.delivery
+    required this.text
   });
 
   Joke copy({
-    int? id,
-    String? setup,
-    String? delivery,
+    String? text
   }) => Joke(
-      id: id ?? this.id,
-      setup: setup ?? this.setup,
-      delivery: delivery ?? this.delivery
+      text: text ?? this.text
   );
 
   static Joke fromJson(Map<String, Object?> json) => Joke(
-      id: json[JokeFields.id] as int?,
-      setup: json[JokeFields.setup] as String,
-      delivery: json[JokeFields.delivery] as String
+      text: json[JokeFields.text] as String
   );
 
   Map<String, Object?> toJson() => {
-    JokeFields.id: id,
-    JokeFields.setup: setup,
-    JokeFields.delivery: delivery
+    JokeFields.text: text
   };
 
 }

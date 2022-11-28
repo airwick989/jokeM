@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 import 'categories.dart' as categories;
 import 'options.dart' as options;
+import 'display_saved_jokes.dart';
 
 Color primaryColor = mycolors.CustomColors.primaryColor;
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
@@ -105,16 +106,16 @@ void navigate(int index, BuildContext context){
       );
       break;
     case 1:
-    //do something
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SavedJokes()),
+      );
       break;
     case 2:
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => options.Options()),
       );
-      break;
-    case 3:
-    //do something
       break;
   }
 }

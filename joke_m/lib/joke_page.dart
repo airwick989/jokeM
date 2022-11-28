@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:joke_m/jokes_database.dart';
 import 'package:joke_m/mycolors.dart';
 import 'package:joke_m/preferences_database.dart';
-import 'dart:convert' as converter;
-import 'categories.dart' as categories;
+import 'package:joke_m/saved_joke.dart';
 import 'package:joke_m/shared_preferences.dart';
+import 'dart:convert' as converter;
+
 
 class JokePage extends StatefulWidget{
   final String category;
@@ -63,9 +65,11 @@ class _JokePageState extends State<JokePage>{
               Column(
                   children: [
                     IconButton(
-                      onPressed: (){
-
-
+                      onPressed: () async {
+                        final newJoke = Joke(
+                            text: _jokeText
+                        );
+                        await JokesDatabase.instance.create(newJoke);
                       },
                       icon: const Icon(Icons.save_alt_rounded, size: 50),
                       color: CustomColors.primaryColor,
