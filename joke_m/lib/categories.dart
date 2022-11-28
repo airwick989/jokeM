@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'mycolors.dart' as mycolors;
 import 'package:vertical_card_pager/vertical_card_pager.dart';
+import 'joke_page.dart' as jokePage;
 
 Color primaryColor = mycolors.CustomColors.primaryColor;
 Color secondaryColor = mycolors.CustomColors.secondaryColor;
@@ -127,7 +128,11 @@ class _CategoriesState extends State<Categories> {
               onPageChanged: (page) {},
               align: ALIGN.CENTER,
               onSelectedItem: (index) {
-                //Do something
+                List<String> categories = <String>["Programming", "Miscellaneous", "Dark", "Pun", "Spooky", "Christmas", "Any"];
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => jokePage.JokePage(category: categories[index])),
+                );
               },
             ),
           ),
