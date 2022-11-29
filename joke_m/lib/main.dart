@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  'and Firebase',
+                  'and SQLite',
                   style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
                         color: Colors.white,
@@ -75,9 +75,9 @@ class MyApp extends StatelessWidget {
                   width: 5,
                 ),
                 Image.asset(
-                  'images/firebaseLogo.png',
-                  width: 25,
-                  height: 25,
+                  'images/sqliteLogo.png',
+                  width: 60,
+                  height: 60,
                 ),
               ],
             ),
