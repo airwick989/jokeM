@@ -4,6 +4,7 @@ import 'package:joke_m/jokes_database.dart';
 import 'package:joke_m/saved_joke.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'open_saved_joke.dart';
 
 class SavedJokes extends StatefulWidget{
   const SavedJokes({super.key});
@@ -63,8 +64,11 @@ class _SavedJokesState extends State<SavedJokes> {
             ),
             tileColor: index%2 == 0 ? primaryColor : secondaryColor,
             contentPadding: EdgeInsets.all(8),
-            onTap: (){
-
+            onTap: () async {
+              bool refresh = await Navigator.push(context, MaterialPageRoute(builder: (context) => OpenJoke(text: jokes[index].text)));
+              if(refresh){
+                refreshJokes();
+              }
             },
           );
         }

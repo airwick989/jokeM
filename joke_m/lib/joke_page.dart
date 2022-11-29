@@ -70,6 +70,7 @@ class _JokePageState extends State<JokePage>{
                             text: _jokeText
                         );
                         await JokesDatabase.instance.create(newJoke);
+                        showAlertDialog(context);
                       },
                       icon: const Icon(Icons.save_alt_rounded, size: 50),
                       color: CustomColors.primaryColor,
@@ -179,6 +180,58 @@ class _JokePageState extends State<JokePage>{
     else {
       throw Exception('Error retrieving API response');
     }
+  }
+
+
+  showAlertDialog(BuildContext context) {
+
+    Widget continueButton = TextButton(
+      onPressed: (){
+        Navigator.pop(context, true);
+      },
+      child: Text(
+        'Continue',
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              color: CustomColors.primaryColor,
+              fontSize: 17,
+            )),
+        textAlign: TextAlign.center,
+      ),
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(
+        'Joke Saved!',
+        style: GoogleFonts.montserrat(
+            textStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+            )),
+        textAlign: TextAlign.center,
+      ),
+      content: Text(
+        'This joke was saved to your saved jokes!',
+        style: GoogleFonts.montserrat(
+            textStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+            )),
+        textAlign: TextAlign.center,
+      ),
+      actions: [
+        continueButton,
+      ],
+      backgroundColor: CustomColors.secondaryColor,
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
 }
